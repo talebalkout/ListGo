@@ -1526,6 +1526,16 @@
     -webkit-tap-highlight-color:transparent;
   }
   .app-menu-button.visible{display:flex;}
+  .app-menu-dot{
+    position:absolute;
+    top:6px;right:6px;
+    width:9px;height:9px;
+    border-radius:50%;
+    background:#ff3b30;
+    border:1.5px solid #fff;
+    display:none;
+  }
+  .app-menu-dot.visible{display:block;}
   .app-menu-button:active{
     transform:scale(.94);
     background:rgba(245,245,247,.94);
@@ -2569,6 +2579,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round">
         <path d="M5 7h14M5 12h14M5 17h14"/>
       </svg>
+      <span class="app-menu-dot" id="appMenuDot"></span>
     </button>
 
     <!-- welcome + sign in (combined launch/sign-in screen) -->
@@ -4624,11 +4635,8 @@
   function updateInboxBadge() {
     const count = INBOX_ITEMS.filter(i => i.status === 'pending' || i.status === 'unread').length;
     const text = count > 9 ? '9+' : String(count);
-    const badge = document.getElementById('inboxBadge');
-    if (badge) {
-      badge.textContent = text;
-      badge.style.display = count > 0 ? 'flex' : 'none';
-    }
+    const menuDot = document.getElementById('appMenuDot');
+    if (menuDot) menuDot.classList.toggle('visible', count > 0);
     const sideBadge = document.getElementById('sideMenuInboxBadge');
     if (sideBadge) {
       sideBadge.textContent = text;
