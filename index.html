@@ -1237,7 +1237,7 @@
 
   /* On a real phone screen (or installed to the Home Screen), drop the
      decorative mockup frame so the app fills the actual display. */
-  @media (max-width: 520px){
+  @media (max-width: 520px), (max-height: 520px) and (orientation: landscape){
     body{padding:0; align-items:stretch; background:var(--paper); min-height:100vh; min-height:100dvh;}
     .phone{width:100%; height:100vh; height:100dvh; padding:0; border-radius:0; box-shadow:none; background:var(--paper);}
     .screen{border-radius:0; height:100%;}
@@ -1943,7 +1943,7 @@
      Desktop prototype stays unchanged. Narrow real devices use
      the viewport itself instead of the simulated desktop phone.
      ========================================================= */
-  @media (max-width: 600px) {
+  @media (max-width: 600px), (max-height: 520px) and (orientation: landscape) {
     html,body{
       width:100%;
       min-width:0;
@@ -1982,7 +1982,7 @@
 
     /* Persistent menu becomes safe-area anchored, not desktop-coordinate anchored. */
     .app-menu-button{
-      top:8px!important;
+      top:calc(env(safe-area-inset-top) + 10px)!important;
       left:14px!important;
       width:42px;
       height:42px;
@@ -2182,7 +2182,7 @@
      LISTGO — REAL IPHONE COMPOSITION PASS
      Applies only to narrow real-device portrait layouts.
      ========================================================= */
-  @media (max-width: 600px) {
+  @media (max-width: 600px), (max-height: 520px) and (orientation: landscape) {
 
     /* ---------- GLOBAL MOBILE RHYTHM ---------- */
     .panel[data-screen="lists"],
@@ -2224,7 +2224,7 @@
     }
 
     .app-menu-button{
-      top:4px!important;
+      top:calc(env(safe-area-inset-top) + 10px)!important;
       left:14px!important;
       width:40px!important;
       height:40px!important;
