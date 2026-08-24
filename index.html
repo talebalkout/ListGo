@@ -2167,6 +2167,381 @@
       height:48px!important;
     }
   }
+
+  /* =========================================================
+     LISTGO — REAL IPHONE COMPOSITION PASS
+     Applies only to narrow real-device portrait layouts.
+     ========================================================= */
+  @media (max-width: 600px) {
+
+    /* ---------- GLOBAL MOBILE RHYTHM ---------- */
+    .panel[data-screen="lists"],
+    .panel[data-screen="places"],
+    .panel[data-screen="favorites"],
+    .panel[data-screen="profile"]{
+      background:var(--paper);
+    }
+
+    /* Reduce the "floating title in empty air" feeling. */
+    .panel[data-screen="lists"] .section-head,
+    .panel[data-screen="places"] .section-head,
+    .panel[data-screen="favorites"] .section-head,
+    .panel[data-screen="profile"] .section-head,
+    .panel[data-screen="profile"] .board-sticky-header .section-head{
+      height:auto!important;
+      min-height:50px!important;
+      padding-top:8px!important;
+      padding-bottom:4px!important;
+      padding-left:70px!important;
+      padding-right:16px!important;
+      font-size:27px!important;
+      line-height:30px!important;
+      letter-spacing:-.7px!important;
+    }
+
+    .main-tab-subtitle,
+    .places-header .section-sub,
+    .lists-header .section-sub,
+    .panel[data-screen="favorites"] .section-sub,
+    .board-sticky-header .community-intro{
+      padding-left:16px!important;
+      padding-right:16px!important;
+      padding-top:0!important;
+      padding-bottom:10px!important;
+      margin:0!important;
+      font-size:12px!important;
+      line-height:17px!important;
+    }
+
+    .app-menu-button{
+      top:4px!important;
+      left:14px!important;
+      width:40px!important;
+      height:40px!important;
+      border-radius:13px!important;
+    }
+
+    /* ---------- LISTS ---------- */
+    .lists-header{
+      padding-bottom:6px!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
+    }
+
+    .lists-header .search-filter-row{
+      margin:0 16px 10px!important;
+      gap:7px!important;
+    }
+    .lists-header .searchbox{
+      height:42px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:14px!important;
+    }
+    .lists-header .filter-open-btn{
+      width:42px!important;
+      height:42px!important;
+      flex:0 0 42px!important;
+      border-radius:14px!important;
+    }
+
+    .lists-view-tabs{
+      margin:0 16px 12px!important;
+      border-radius:14px!important;
+    }
+
+    /* Give list cards enough visual weight on the phone. */
+    .lists-country-grid,
+    #listsGrid{
+      padding-left:16px!important;
+      padding-right:16px!important;
+    }
+    .country-section,
+    .lists-country-section{
+      margin-bottom:18px!important;
+    }
+    .country-title,
+    .lists-country-title{
+      padding-left:0!important;
+      padding-right:0!important;
+      margin-bottom:8px!important;
+    }
+    #listsGrid .list-card,
+    .lists-country-grid .list-card{
+      width:min(82vw, 320px)!important;
+      min-width:min(82vw, 320px)!important;
+      aspect-ratio:1.22/1!important;
+      border-radius:22px!important;
+    }
+    #listsGrid .card-grid,
+    .lists-country-grid .card-grid{
+      gap:12px!important;
+      padding-bottom:12px!important;
+    }
+
+    /* ---------- GOING ---------- */
+    .panel[data-screen="favorites"] .places-header{
+      padding-bottom:0!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
+    }
+
+    /* Remove the inset "desktop column" look. */
+    .panel[data-screen="favorites"] #favoritesList,
+    .panel[data-screen="favorites"] .places-list,
+    .panel[data-screen="favorites"] .place-list{
+      width:100%!important;
+      margin:0!important;
+      padding:0 16px 20px!important;
+      background:transparent!important;
+      box-sizing:border-box!important;
+    }
+
+    .panel[data-screen="favorites"] .place-row{
+      margin:0!important;
+      padding:14px 0!important;
+      gap:10px!important;
+      background:transparent!important;
+      border-top:1px solid var(--hairline)!important;
+    }
+    .panel[data-screen="favorites"] .place-row:first-child{
+      border-top:0!important;
+    }
+
+    /* Cleaner Going CTA on narrow screen. */
+    .panel[data-screen="favorites"] .going-btn{
+      width:auto!important;
+      min-width:58px!important;
+      height:34px!important;
+      padding:0 10px!important;
+      border-radius:17px!important;
+      background:var(--accent-soft)!important;
+      color:var(--accent)!important;
+      font-size:10px!important;
+      font-weight:800!important;
+      flex:0 0 auto!important;
+    }
+    .panel[data-screen="favorites"] .place-going-col{
+      width:auto!important;
+      flex:0 0 auto!important;
+    }
+
+    /* ---------- PLACES ---------- */
+    .places-header{
+      padding-bottom:8px!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
+    }
+
+    /* Make the overview compact enough that content starts sooner. */
+    .places-overview{
+      margin:0 16px 9px!important;
+      gap:6px!important;
+    }
+    .places-overview-btn{
+      height:48px!important;
+      border-radius:14px!important;
+      padding:5px 2px!important;
+    }
+    .places-overview-btn strong{
+      font-size:15px!important;
+    }
+    .places-overview-btn span{
+      font-size:8.8px!important;
+    }
+
+    .places-area-wrap{
+      margin-bottom:8px!important;
+    }
+    .places-area-head{
+      padding:0 16px 6px!important;
+    }
+    .places-area-head span:first-child{
+      font-size:10px!important;
+    }
+    .places-area-scroll{
+      padding:0 16px 1px!important;
+      gap:6px!important;
+    }
+    .places-area-chip{
+      height:29px!important;
+      font-size:10.5px!important;
+      padding:0 10px!important;
+    }
+
+    .places-header .search-filter-row{
+      margin:0 16px 8px!important;
+      gap:6px!important;
+    }
+    .places-header .searchbox{
+      height:40px!important;
+      border-radius:13px!important;
+      padding-left:13px!important;
+      font-size:13.5px!important;
+    }
+    .places-header .filter-open-btn{
+      width:40px!important;
+      height:40px!important;
+      flex:0 0 40px!important;
+      border-radius:13px!important;
+    }
+
+    /* Place rows: less horizontal fighting, more readable. */
+    .panel[data-screen="places"] .place-row{
+      margin:0 16px!important;
+      padding:13px 0!important;
+      gap:10px!important;
+    }
+    .panel[data-screen="places"] .place-thumb{
+      width:58px!important;
+      height:58px!important;
+      flex:0 0 58px!important;
+      border-radius:14px!important;
+    }
+    .panel[data-screen="places"] .place-copy strong{
+      font-size:13.5px!important;
+      line-height:17px!important;
+    }
+    .panel[data-screen="places"] .place-copy span{
+      font-size:11.5px!important;
+      line-height:15px!important;
+      -webkit-line-clamp:2!important;
+    }
+    .panel[data-screen="places"] .place-copy small{
+      font-size:10.5px!important;
+    }
+    .panel[data-screen="places"] .place-going-col{
+      width:auto!important;
+      flex:0 0 auto!important;
+    }
+    .panel[data-screen="places"] .going-btn{
+      width:auto!important;
+      min-width:58px!important;
+      height:34px!important;
+      padding:0 10px!important;
+      border-radius:17px!important;
+      background:var(--accent-soft)!important;
+      color:var(--accent)!important;
+      font-size:10px!important;
+      font-weight:800!important;
+    }
+
+    /* ---------- BOARD ---------- */
+    .board-sticky-header{
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08)!important;
+    }
+
+    .board-sticky-header .community-intro{
+      padding-bottom:8px!important;
+    }
+
+    .explore-follow-stats{
+      padding:0 16px 10px!important;
+      gap:8px!important;
+    }
+    .explore-follow-stat{
+      min-height:32px!important;
+      padding:0 10px!important;
+      font-size:12px!important;
+      border-radius:11px!important;
+    }
+
+    .board-sticky-header .community-tabs{
+      margin:0 16px 8px!important;
+      border-radius:14px!important;
+    }
+
+    .board-scroll-search{
+      margin:8px 16px 10px!important;
+      padding:0!important;
+    }
+    .board-scroll-search .searchbox{
+      height:42px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:14px!important;
+    }
+
+    .community-feed{
+      padding:0 12px 26px!important;
+      gap:14px!important;
+    }
+    .community-post{
+      border-radius:20px!important;
+      box-shadow:0 5px 16px rgba(17,17,20,.055)!important;
+    }
+    .community-post-author{
+      padding:11px 12px 10px!important;
+    }
+    .community-post-author .explore-user-avatar{
+      width:36px!important;
+      height:36px!important;
+    }
+    .board-list-media{
+      height:270px!important;
+    }
+    .board-place-media{
+      height:280px!important;
+    }
+    .board-media-title{
+      font-size:20px!important;
+    }
+    .board-post-footer{
+      padding:10px 12px 12px!important;
+    }
+
+    /* ---------- BOTTOM NAV ---------- */
+    .bottombar{
+      min-height:72px!important;
+      padding-top:7px!important;
+      padding-bottom:max(8px,env(safe-area-inset-bottom))!important;
+    }
+    .bnav{
+      font-size:11.5px!important;
+    }
+    .fab{
+      width:54px!important;
+      height:54px!important;
+      margin-top:-9px!important;
+    }
+
+    /* ---------- CREATE SHEET ---------- */
+    #createChoiceSheet .share-panel{
+      padding-left:16px!important;
+      padding-right:16px!important;
+    }
+    #createChoiceSheet .create-choice-row{
+      gap:8px!important;
+    }
+    #createChoiceSheet .create-choice-btn{
+      min-width:0!important;
+      padding:18px 6px!important;
+      border-radius:16px!important;
+      font-size:11.5px!important;
+    }
+  }
+
+  @media (max-width: 350px) {
+    #listsGrid .list-card,
+    .lists-country-grid .list-card{
+      width:86vw!important;
+      min-width:86vw!important;
+    }
+
+    .places-overview{
+      grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    }
+    .places-overview-btn{
+      height:46px!important;
+    }
+    .places-overview-btn strong{
+      font-size:14px!important;
+    }
+    .places-overview-btn span{
+      font-size:8px!important;
+    }
+  }
 </style>
 </head>
 <body>
