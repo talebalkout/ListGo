@@ -723,7 +723,7 @@
   .status-toggle-btn.done{background:#eaf6ec;color:#2f8f4e;border-color:#bfe6c8;}
   .icon-action-btn.danger{background:#e5484d;color:#fff;}
   .list-cover{height:118px;margin:0 18px;border-radius:22px;background:linear-gradient(180deg,#8c6985 0%,#eea470 55%,#362532 100%);position:relative;overflow:hidden;}
-  .list-cover::before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;left:20px;top:-30px;background:radial-gradient(circle,rgba(255,230,174,.9),rgba(255,230,174,0) 68%);}
+  .list-cover::before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;left:20px;top:-20px;opacity:.55;background:radial-gradient(circle,rgba(255,230,174,.9),rgba(255,230,174,0) 68%);}
   .list-cover-copy{position:absolute;left:18px;right:18px;bottom:12px;}
   .list-cover-title{margin:0;color:#fff;font-size:21px;font-weight:800;letter-spacing:-.4px;text-shadow:0 2px 10px rgba(0,0,0,.4);}
   .list-cover-category{margin:2px 0 0;color:rgba(255,255,255,.85);font-size:13px;font-weight:650;text-shadow:0 1px 6px rgba(0,0,0,.4);}
@@ -6099,17 +6099,20 @@
     el.style.backgroundSize = '';
     el.style.backgroundPosition = '';
     el.style.backgroundColor = '';
+    el.style.backgroundRepeat = '';
     if (list.customCover) {
       el.className = baseClass;
       el.style.backgroundImage = `url(${list.customCover})`;
       el.style.backgroundSize = 'cover';
       el.style.backgroundPosition = 'center';
+      el.style.backgroundRepeat = 'no-repeat';
     } else if (list.cover === DEFAULT_LIST_COVER) {
       el.className = baseClass;
       el.style.backgroundColor = 'var(--canvas)';
       el.style.backgroundImage = `url(${APP_LOGO_DATA_URL})`;
       el.style.backgroundSize = '22%';
       el.style.backgroundPosition = 'center';
+      el.style.backgroundRepeat = 'no-repeat';
     } else {
       el.className = baseClass + ' ' + (list.cover || '');
     }
@@ -6133,7 +6136,7 @@
 
   function placeThumbStyle(p) {
     const cover = p.customPhoto || (p.photos && p.photos[0]);
-    if (cover) return `background-image:url(${cover});background-size:cover;background-position:center;`;
+    if (cover) return `background-image:url(${cover});background-size:cover;background-position:center;background-repeat:no-repeat;`;
     if (p.grad === DEFAULT_PLACE_GRAD) return DEFAULT_PLACE_STYLE;
     return `background:${p.grad};`;
   }
