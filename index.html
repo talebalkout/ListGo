@@ -723,7 +723,7 @@
   .status-toggle-btn.done{background:#eaf6ec;color:#2f8f4e;border-color:#bfe6c8;}
   .icon-action-btn.danger{background:#e5484d;color:#fff;}
   .list-cover{height:118px;margin:0 18px;border-radius:22px;background:linear-gradient(180deg,#8c6985 0%,#eea470 55%,#362532 100%);position:relative;overflow:hidden;}
-  .list-cover::before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;left:20px;top:-30px;background:radial-gradient(circle,rgba(255,230,174,.9),rgba(255,230,174,0) 68%);}
+  .list-cover::before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;left:20px;top:-20px;opacity:.55;background:radial-gradient(circle,rgba(255,230,174,.9),rgba(255,230,174,0) 68%);}
   .list-cover-copy{position:absolute;left:18px;right:18px;bottom:12px;}
   .list-cover-title{margin:0;color:#fff;font-size:21px;font-weight:800;letter-spacing:-.4px;text-shadow:0 2px 10px rgba(0,0,0,.4);}
   .list-cover-category{margin:2px 0 0;color:rgba(255,255,255,.85);font-size:13px;font-weight:650;text-shadow:0 1px 6px rgba(0,0,0,.4);}
@@ -1237,7 +1237,7 @@
 
   /* On a real phone screen (or installed to the Home Screen), drop the
      decorative mockup frame so the app fills the actual display. */
-  @media (max-width: 520px){
+  @media (max-width: 520px), (max-height: 520px) and (orientation: landscape){
     body{padding:0; align-items:stretch; background:var(--paper); min-height:100vh; min-height:100dvh;}
     .phone{width:100%; height:100vh; height:100dvh; padding:0; border-radius:0; box-shadow:none; background:var(--paper);}
     .screen{border-radius:0; height:100%;}
@@ -1526,6 +1526,16 @@
     -webkit-tap-highlight-color:transparent;
   }
   .app-menu-button.visible{display:flex;}
+  .app-menu-dot{
+    position:absolute;
+    top:6px;right:6px;
+    width:9px;height:9px;
+    border-radius:50%;
+    background:#ff3b30;
+    border:1.5px solid #fff;
+    display:none;
+  }
+  .app-menu-dot.visible{display:block;}
   .app-menu-button:active{
     transform:scale(.94);
     background:rgba(245,245,247,.94);
@@ -1933,7 +1943,7 @@
      Desktop prototype stays unchanged. Narrow real devices use
      the viewport itself instead of the simulated desktop phone.
      ========================================================= */
-  @media (max-width: 600px) {
+  @media (max-width: 600px), (max-height: 520px) and (orientation: landscape) {
     html,body{
       width:100%;
       min-width:0;
@@ -1972,7 +1982,7 @@
 
     /* Persistent menu becomes safe-area anchored, not desktop-coordinate anchored. */
     .app-menu-button{
-      top:8px!important;
+      top:calc(env(safe-area-inset-top) + 10px)!important;
       left:14px!important;
       width:42px;
       height:42px;
@@ -2169,97 +2179,377 @@
   }
 
   /* =========================================================
-     MOBILE RECOVERY SAFEGUARDS
-     Deliberately narrow: do not resize shared components globally.
+     LISTGO — REAL IPHONE COMPOSITION PASS
+     Applies only to narrow real-device portrait layouts.
      ========================================================= */
-  @media (max-width: 600px) {
-    .panel[data-screen="list-detail"] .list-cover{
-      width:auto!important;
-      max-width:none!important;
-      margin-left:14px!important;
-      margin-right:14px!important;
-      height:178px!important;
-      border-radius:20px!important;
-      box-sizing:border-box!important;
+  @media (max-width: 600px), (max-height: 520px) and (orientation: landscape) {
+
+    /* ---------- GLOBAL MOBILE RHYTHM ---------- */
+    .panel[data-screen="lists"],
+    .panel[data-screen="places"],
+    .panel[data-screen="favorites"],
+    .panel[data-screen="profile"]{
+      background:var(--paper);
     }
 
-    .panel[data-screen="shared-list-preview"] .list-cover,
-    .panel[data-screen="shared-list-preview"] .published-gallery{
-      width:auto!important;
-      max-width:none!important;
-      margin-left:14px!important;
-      margin-right:14px!important;
-      height:190px!important;
-      border-radius:20px!important;
-      box-sizing:border-box!important;
+    /* Reduce the "floating title in empty air" feeling. */
+    .panel[data-screen="lists"] .section-head,
+    .panel[data-screen="places"] .section-head,
+    .panel[data-screen="favorites"] .section-head,
+    .panel[data-screen="profile"] .section-head,
+    .panel[data-screen="profile"] .board-sticky-header .section-head{
+      height:auto!important;
+      min-height:50px!important;
+      padding-top:8px!important;
+      padding-bottom:4px!important;
+      padding-left:70px!important;
+      padding-right:16px!important;
+      font-size:27px!important;
+      line-height:30px!important;
+      letter-spacing:-.7px!important;
     }
 
-    .panel[data-screen="shared-list-preview"] .published-gallery-track,
-    .panel[data-screen="shared-list-preview"] .published-gallery-slide{
-      width:100%!important;
-      height:100%!important;
-      min-width:100%!important;
-      box-sizing:border-box!important;
+    .main-tab-subtitle,
+    .places-header .section-sub,
+    .lists-header .section-sub,
+    .panel[data-screen="favorites"] .section-sub,
+    .board-sticky-header .community-intro{
+      padding-left:16px!important;
+      padding-right:16px!important;
+      padding-top:0!important;
+      padding-bottom:10px!important;
+      margin:0!important;
+      font-size:12px!important;
+      line-height:17px!important;
     }
 
-    .panel[data-screen="shared-place-preview"] .list-cover,
-    .panel[data-screen="shared-place-preview"] .published-gallery{
-      width:auto!important;
-      max-width:none!important;
-      margin-left:14px!important;
-      margin-right:14px!important;
-      height:210px!important;
-      border-radius:20px!important;
-      box-sizing:border-box!important;
+    .app-menu-button{
+      top:calc(env(safe-area-inset-top) + 10px)!important;
+      left:14px!important;
+      width:40px!important;
+      height:40px!important;
+      border-radius:13px!important;
     }
 
-    .panel[data-screen="shared-place-preview"] .published-gallery-track,
-    .panel[data-screen="shared-place-preview"] .published-gallery-slide{
-      width:100%!important;
-      height:100%!important;
-      min-width:100%!important;
-      box-sizing:border-box!important;
+    /* ---------- LISTS ---------- */
+    .lists-header{
+      padding-bottom:6px!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
     }
 
-    .panel[data-screen="place-detail"] .place-gallery,
-    .panel[data-screen="place-detail"] .place-gallery-track{
-      width:100%!important;
-      max-width:100%!important;
-      box-sizing:border-box!important;
+    .lists-header .search-filter-row{
+      margin:0 16px 10px!important;
+      gap:7px!important;
     }
-
-    .panel[data-screen="list-detail"] .place-row{
-      width:auto!important;
-      max-width:none!important;
-      margin-left:14px!important;
-      margin-right:14px!important;
-      box-sizing:border-box!important;
+    .lists-header .searchbox{
+      height:42px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:14px!important;
     }
-
-    .panel[data-screen="list-detail"] .place-thumb{
-      flex:0 0 62px!important;
-      width:62px!important;
-      height:62px!important;
-      max-width:62px!important;
+    .lists-header .filter-open-btn{
+      width:42px!important;
+      height:42px!important;
+      flex:0 0 42px!important;
       border-radius:14px!important;
     }
 
-    .panel[data-screen="list-detail"] .place-copy{
+    .lists-view-tabs{
+      margin:0 16px 12px!important;
+      border-radius:14px!important;
+    }
+
+    /* Give list cards enough visual weight on the phone. */
+    .lists-country-grid,
+    #listsGrid{
+      padding-left:16px!important;
+      padding-right:16px!important;
+    }
+    .country-section,
+    .lists-country-section{
+      margin-bottom:18px!important;
+    }
+    .country-title,
+    .lists-country-title{
+      padding-left:0!important;
+      padding-right:0!important;
+      margin-bottom:8px!important;
+    }
+    #listsGrid .list-card,
+    .lists-country-grid .list-card{
+      width:min(82vw, 320px)!important;
+      min-width:min(82vw, 320px)!important;
+      aspect-ratio:1.22/1!important;
+      border-radius:22px!important;
+    }
+    #listsGrid .card-grid,
+    .lists-country-grid .card-grid{
+      gap:12px!important;
+      padding-bottom:12px!important;
+    }
+
+    /* ---------- GOING ---------- */
+    .panel[data-screen="favorites"] .places-header{
+      padding-bottom:0!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
+    }
+
+    /* Remove the inset "desktop column" look. */
+    .panel[data-screen="favorites"] #favoritesList,
+    .panel[data-screen="favorites"] .places-list,
+    .panel[data-screen="favorites"] .place-list{
+      width:100%!important;
+      margin:0!important;
+      padding:0 16px 20px!important;
+      background:transparent!important;
+      box-sizing:border-box!important;
+    }
+
+    .panel[data-screen="favorites"] .place-row{
+      margin:0!important;
+      padding:14px 0!important;
+      gap:10px!important;
+      background:transparent!important;
+      border-top:1px solid var(--hairline)!important;
+    }
+    .panel[data-screen="favorites"] .place-row:first-child{
+      border-top:0!important;
+    }
+
+    /* Cleaner Going CTA on narrow screen. */
+    .panel[data-screen="favorites"] .going-btn{
+      width:auto!important;
+      min-width:58px!important;
+      height:34px!important;
+      padding:0 10px!important;
+      border-radius:17px!important;
+      background:var(--accent-soft)!important;
+      color:var(--accent)!important;
+      font-size:10px!important;
+      font-weight:800!important;
+      flex:0 0 auto!important;
+    }
+    .panel[data-screen="favorites"] .place-going-col{
+      width:auto!important;
+      flex:0 0 auto!important;
+    }
+
+    /* ---------- PLACES ---------- */
+    .places-header{
+      padding-bottom:8px!important;
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08);
+    }
+
+    /* Make the overview compact enough that content starts sooner. */
+    .places-overview{
+      margin:0 16px 9px!important;
+      gap:6px!important;
+    }
+    .places-overview-btn{
+      height:48px!important;
+      border-radius:14px!important;
+      padding:5px 2px!important;
+    }
+    .places-overview-btn strong{
+      font-size:15px!important;
+    }
+    .places-overview-btn span{
+      font-size:8.8px!important;
+    }
+
+    .places-area-wrap{
+      margin-bottom:8px!important;
+    }
+    .places-area-head{
+      padding:0 16px 6px!important;
+    }
+    .places-area-head span:first-child{
+      font-size:10px!important;
+    }
+    .places-area-scroll{
+      padding:0 16px 1px!important;
+      gap:6px!important;
+    }
+    .places-area-chip{
+      height:29px!important;
+      font-size:10.5px!important;
+      padding:0 10px!important;
+    }
+
+    .places-header .search-filter-row{
+      margin:0 16px 8px!important;
+      gap:6px!important;
+    }
+    .places-header .searchbox{
+      height:40px!important;
+      border-radius:13px!important;
+      padding-left:13px!important;
+      font-size:13.5px!important;
+    }
+    .places-header .filter-open-btn{
+      width:40px!important;
+      height:40px!important;
+      flex:0 0 40px!important;
+      border-radius:13px!important;
+    }
+
+    /* Place rows: less horizontal fighting, more readable. */
+    .panel[data-screen="places"] .place-row{
+      margin:0 16px!important;
+      padding:13px 0!important;
+      gap:10px!important;
+    }
+    .panel[data-screen="places"] .place-thumb{
+      width:58px!important;
+      height:58px!important;
+      flex:0 0 58px!important;
+      border-radius:14px!important;
+    }
+    .panel[data-screen="places"] .place-copy strong{
+      font-size:13.5px!important;
+      line-height:17px!important;
+    }
+    .panel[data-screen="places"] .place-copy span{
+      font-size:11.5px!important;
+      line-height:15px!important;
+      -webkit-line-clamp:2!important;
+    }
+    .panel[data-screen="places"] .place-copy small{
+      font-size:10.5px!important;
+    }
+    .panel[data-screen="places"] .place-going-col{
+      width:auto!important;
+      flex:0 0 auto!important;
+    }
+    .panel[data-screen="places"] .going-btn{
+      width:auto!important;
+      min-width:58px!important;
+      height:34px!important;
+      padding:0 10px!important;
+      border-radius:17px!important;
+      background:var(--accent-soft)!important;
+      color:var(--accent)!important;
+      font-size:10px!important;
+      font-weight:800!important;
+    }
+
+    /* ---------- BOARD ---------- */
+    .board-sticky-header{
+      box-shadow:none!important;
+      border-bottom:1px solid rgba(60,60,67,.08)!important;
+    }
+
+    .board-sticky-header .community-intro{
+      padding-bottom:8px!important;
+    }
+
+    .explore-follow-stats{
+      padding:0 16px 10px!important;
+      gap:8px!important;
+    }
+    .explore-follow-stat{
+      min-height:32px!important;
+      padding:0 10px!important;
+      font-size:12px!important;
+      border-radius:11px!important;
+    }
+
+    .board-sticky-header .community-tabs{
+      margin:0 16px 8px!important;
+      border-radius:14px!important;
+    }
+
+    .board-scroll-search{
+      margin:8px 16px 10px!important;
+      padding:0!important;
+    }
+    .board-scroll-search .searchbox{
+      height:42px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:14px!important;
+    }
+
+    .community-feed{
+      padding:0 12px 26px!important;
+      gap:14px!important;
+    }
+    .community-post{
+      border-radius:20px!important;
+      box-shadow:0 5px 16px rgba(17,17,20,.055)!important;
+    }
+    .community-post-author{
+      padding:11px 12px 10px!important;
+    }
+    .community-post-author .explore-user-avatar{
+      width:36px!important;
+      height:36px!important;
+    }
+    .board-list-media{
+      height:270px!important;
+    }
+    .board-place-media{
+      height:280px!important;
+    }
+    .board-media-title{
+      font-size:20px!important;
+    }
+    .board-post-footer{
+      padding:10px 12px 12px!important;
+    }
+
+    /* ---------- BOTTOM NAV ---------- */
+    .bottombar{
+      min-height:72px!important;
+      padding-top:7px!important;
+      padding-bottom:max(8px,env(safe-area-inset-bottom))!important;
+    }
+    .bnav{
+      font-size:11.5px!important;
+    }
+    .fab{
+      width:54px!important;
+      height:54px!important;
+      margin-top:-9px!important;
+    }
+
+    /* ---------- CREATE SHEET ---------- */
+    #createChoiceSheet .share-panel{
+      padding-left:16px!important;
+      padding-right:16px!important;
+    }
+    #createChoiceSheet .create-choice-row{
+      gap:8px!important;
+    }
+    #createChoiceSheet .create-choice-btn{
       min-width:0!important;
-      flex:1 1 auto!important;
+      padding:18px 6px!important;
+      border-radius:16px!important;
+      font-size:11.5px!important;
+    }
+  }
+
+  @media (max-width: 350px) {
+    #listsGrid .list-card,
+    .lists-country-grid .list-card{
+      width:86vw!important;
+      min-width:86vw!important;
     }
 
-    .panel[data-screen="list-detail"] .place-copy strong,
-    .panel[data-screen="list-detail"] .place-copy span,
-    .panel[data-screen="list-detail"] .place-copy small{
-      max-width:100%!important;
-      overflow:hidden!important;
+    .places-overview{
+      grid-template-columns:repeat(4,minmax(0,1fr))!important;
     }
-
-    .panel[data-screen="list-detail"] .place-going-col{
-      flex:0 0 48px!important;
-      width:48px!important;
-      max-width:48px!important;
+    .places-overview-btn{
+      height:46px!important;
+    }
+    .places-overview-btn strong{
+      font-size:14px!important;
+    }
+    .places-overview-btn span{
+      font-size:8px!important;
     }
   }
 </style>
@@ -2289,6 +2579,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round">
         <path d="M5 7h14M5 12h14M5 17h14"/>
       </svg>
+      <span class="app-menu-dot" id="appMenuDot"></span>
     </button>
 
     <!-- welcome + sign in (combined launch/sign-in screen) -->
@@ -4344,11 +4635,8 @@
   function updateInboxBadge() {
     const count = INBOX_ITEMS.filter(i => i.status === 'pending' || i.status === 'unread').length;
     const text = count > 9 ? '9+' : String(count);
-    const badge = document.getElementById('inboxBadge');
-    if (badge) {
-      badge.textContent = text;
-      badge.style.display = count > 0 ? 'flex' : 'none';
-    }
+    const menuDot = document.getElementById('appMenuDot');
+    if (menuDot) menuDot.classList.toggle('visible', count > 0);
     const sideBadge = document.getElementById('sideMenuInboxBadge');
     if (sideBadge) {
       sideBadge.textContent = text;
@@ -5811,17 +6099,20 @@
     el.style.backgroundSize = '';
     el.style.backgroundPosition = '';
     el.style.backgroundColor = '';
+    el.style.backgroundRepeat = '';
     if (list.customCover) {
       el.className = baseClass;
       el.style.backgroundImage = `url(${list.customCover})`;
       el.style.backgroundSize = 'cover';
       el.style.backgroundPosition = 'center';
+      el.style.backgroundRepeat = 'no-repeat';
     } else if (list.cover === DEFAULT_LIST_COVER) {
       el.className = baseClass;
       el.style.backgroundColor = 'var(--canvas)';
       el.style.backgroundImage = `url(${APP_LOGO_DATA_URL})`;
       el.style.backgroundSize = '22%';
       el.style.backgroundPosition = 'center';
+      el.style.backgroundRepeat = 'no-repeat';
     } else {
       el.className = baseClass + ' ' + (list.cover || '');
     }
@@ -5845,7 +6136,7 @@
 
   function placeThumbStyle(p) {
     const cover = p.customPhoto || (p.photos && p.photos[0]);
-    if (cover) return `background-image:url(${cover});background-size:cover;background-position:center;`;
+    if (cover) return `background-image:url(${cover});background-size:cover;background-position:center;background-repeat:no-repeat;`;
     if (p.grad === DEFAULT_PLACE_GRAD) return DEFAULT_PLACE_STYLE;
     return `background:${p.grad};`;
   }
@@ -8054,11 +8345,19 @@
     if (card) {
       card.className = `mini-card list-card ${cover}`;
       card.style.backgroundImage = '';
+      card.style.backgroundColor = '';
+      card.style.backgroundSize = '';
+      card.style.backgroundPosition = '';
+      card.style.backgroundRepeat = '';
     }
     if (currentListId === id) {
       const coverEl = document.getElementById('listCover');
       coverEl.className = 'list-cover ' + cover;
       coverEl.style.backgroundImage = '';
+      coverEl.style.backgroundColor = '';
+      coverEl.style.backgroundSize = '';
+      coverEl.style.backgroundPosition = '';
+      coverEl.style.backgroundRepeat = '';
     }
     toast('Cover updated');
   }
@@ -8071,16 +8370,20 @@
     const card = document.querySelector(`[data-open-list="${id}"]`);
     if (card) {
       card.className = 'mini-card list-card';
+      card.style.backgroundColor = '';
       card.style.backgroundImage = `url(${dataUrl})`;
       card.style.backgroundSize = 'cover';
       card.style.backgroundPosition = 'center';
+      card.style.backgroundRepeat = 'no-repeat';
     }
     if (currentListId === id) {
       const coverEl = document.getElementById('listCover');
       coverEl.className = 'list-cover';
+      coverEl.style.backgroundColor = '';
       coverEl.style.backgroundImage = `url(${dataUrl})`;
       coverEl.style.backgroundSize = 'cover';
       coverEl.style.backgroundPosition = 'center';
+      coverEl.style.backgroundRepeat = 'no-repeat';
     }
     toast('Cover updated');
   }
@@ -11084,6 +11387,38 @@
     bottomBarForA11y.addEventListener('click', () => requestAnimationFrame(syncBottomNavAccessibility));
   }
   syncBottomNavAccessibility();
+
+  // ---- TEMPORARY DEBUG TOOL ----
+  // Long-press (about 3/4 second) on any list cover or list card to see
+  // its actual live background styles on screen. Remove once diagnosed.
+  (function setupCoverDebugInspector() {
+    let pressTimer = null;
+    let pressedEl = null;
+    function showDebugInfo(el) {
+      const cs = getComputedStyle(el);
+      const rect = el.getBoundingClientRect();
+      const lines = [
+        'ELEMENT: ' + el.className,
+        'size: ' + Math.round(rect.width) + ' x ' + Math.round(rect.height),
+        'background-image: ' + (cs.backgroundImage.length > 60 ? cs.backgroundImage.slice(0, 60) + '...(truncated)' : cs.backgroundImage),
+        'background-color: ' + cs.backgroundColor,
+        'background-size: ' + cs.backgroundSize,
+        'background-position: ' + cs.backgroundPosition,
+        'background-repeat: ' + cs.backgroundRepeat,
+        'inline style attr: ' + (el.getAttribute('style') || '(none)')
+      ];
+      alert(lines.join('\n'));
+    }
+    document.addEventListener('touchstart', e => {
+      const target = e.target.closest('.list-card, .list-cover');
+      if (!target) return;
+      pressedEl = target;
+      pressTimer = setTimeout(() => { showDebugInfo(pressedEl); pressedEl = null; }, 700);
+    }, { passive: true });
+    ['touchend', 'touchmove', 'touchcancel'].forEach(evt => {
+      document.addEventListener(evt, () => { clearTimeout(pressTimer); }, { passive: true });
+    });
+  })();
 </script>
 
 </body>
