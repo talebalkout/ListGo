@@ -2276,12 +2276,17 @@
       padding-right:0!important;
       margin-bottom:8px!important;
     }
-    #listsGrid .list-card,
-    .lists-country-grid .list-card{
+    #listsGrid .list-card{
       width:min(82vw, 320px)!important;
       min-width:min(82vw, 320px)!important;
       aspect-ratio:1.22/1!important;
       border-radius:22px!important;
+    }
+    .lists-country-grid .list-card{
+      width:100%!important;
+      min-width:0!important;
+      aspect-ratio:1/1!important;
+      border-radius:20px!important;
     }
     #listsGrid .card-grid,
     .lists-country-grid .card-grid{
@@ -2503,7 +2508,6 @@
 
     /* ---------- BOTTOM NAV ---------- */
     .bottombar{
-      min-height:72px!important;
       padding-top:7px!important;
       padding-bottom:max(8px,env(safe-area-inset-bottom))!important;
     }
@@ -2533,8 +2537,7 @@
   }
 
   @media (max-width: 350px) {
-    #listsGrid .list-card,
-    .lists-country-grid .list-card{
+    #listsGrid .list-card{
       width:86vw!important;
       min-width:86vw!important;
     }
